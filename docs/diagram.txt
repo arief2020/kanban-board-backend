@@ -1,0 +1,70 @@
+Table Users {
+    id int PK
+    name varchar
+    email varchar
+    password varchar
+    photo varchar
+    created_at date
+    updated_at date
+}
+
+Table Boards {
+  id int PK
+  name varchar
+  user_id int
+  star bool
+  created_at date
+  updated_at date
+}
+
+Table Lists {
+  id int PK
+  name varchar
+  board_id int
+  created_at date
+  updated_at date
+}
+
+Table Cards {
+  id int PK
+  title varchar
+  description varchar
+  due_date date
+  list_id int
+  created_at date
+  updated_at date
+}
+
+Table Comments {
+  id int PK
+  content varchar
+  user_id int
+  card_id int
+  created_at date
+  updated_at date
+}
+
+Table Activity {
+  id int PK
+  action varchar
+  user_id int
+  board_id int
+  card_id int
+  created_at date
+}
+
+Ref: "Boards"."user_id" < "Users"."id"
+
+Ref: "Lists"."board_id" < "Boards"."id"
+
+Ref: "Cards"."list_id" < "Lists"."id"
+
+Ref: "Activity"."user_id" < "Users"."id"
+
+Ref: "Activity"."board_id" < "Boards"."id"
+
+Ref: "Activity"."card_id" < "Cards"."id"
+
+Ref: "Comments"."user_id" < "Users"."id"
+
+Ref: "Comments"."card_id" < "Cards"."id"
